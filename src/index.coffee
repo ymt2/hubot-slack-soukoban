@@ -97,7 +97,7 @@ module.exports = (robot) ->
       , Promise.resolve())
 
 
-  robot.adapter.client.on 'raw_message', (message) ->
+  robot.adapter.client?.on? 'raw_message', (message) ->
     robotUserId = robot.adapter.client.getUserByName(robot.name).id
     if (/^reaction_(added|removed)$/.test message.type) && (message.user isnt robotUserId)
       emojiKey = _.findKey EMOJIS, (emoji) -> emoji is message.reaction
